@@ -1,4 +1,7 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.01001 2009-06-29T16:12:13+09:00
+     - added coderef support to template_args
+
 0.01 2009-06-29T15:31:52+09:00
      - original version

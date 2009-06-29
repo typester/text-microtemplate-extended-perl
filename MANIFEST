@@ -28,6 +28,7 @@ t/pod.t
 t/pod_coverage.t
 t/templates/args.mt
 t/templates/base.mt
+t/templates/code.mt
 t/templates/content.mt
 t/templates/simple.mt
 t/templates/subbase.mt
