@@ -15,6 +15,7 @@ inc/Test/Base/Filter.pm
 inc/Test/Builder.pm
 inc/Test/Builder/Module.pm
 inc/Test/More.pm
+lib/Text/MicroTemplate/Extended.ja.pod
 lib/Text/MicroTemplate/Extended.pm
 LICENSE
 Makefile.PL
@@ -22,5 +23,13 @@ MANIFEST			This list of files
 META.yml
 README
 t/00_compile.t
+t/module.t
 t/pod.t
 t/pod_coverage.t
+t/templates/args.mt
+t/templates/base.mt
+t/templates/content.mt
+t/templates/simple.mt
+t/templates/subbase.mt
+t/templates/subbase2.mt
+t/templates/subcontent.mt
