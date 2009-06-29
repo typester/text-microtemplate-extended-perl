@@ -9,8 +9,9 @@ my $mt = Text::MicroTemplate::Extended->new(
     include_path => [ "$FindBin::Bin/templates" ],
     use_cache    => 2,
     template_args => {
-        foo => 'foo!',
-        bar => { bar => 'bar!!!' },
+        foo  => 'foo!',
+        bar  => { bar => 'bar!!!' },
+        code => sub { 'code out' },
     },
 );
 
@@ -71,3 +72,8 @@ content modified
 --- expected
 foo!
 bar!!!
+
+=== template args with coderef
+--- input: code
+--- expected
+code out

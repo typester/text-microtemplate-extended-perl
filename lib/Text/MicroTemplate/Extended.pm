@@ -106,7 +106,13 @@ sub build {
         unless ($key =~ /^[a-zA-Z_][a-zA-Z0-9_]*$/) {
             die qq{Invalid template args key name: "$key"};
         }
-        $context->{args} .= qq{my \$$key = \$self->template_args->{$key};\n};
+
+        if (ref($self->template_args->{$key}) eq 'CODE') {
+            $context->{args} .= qq{my \$$key = \$self->template_args->{$key}->();\n};
+        }
+        else {
+            $context->{args} .= qq{my \$$key = \$self->template_args->{$key};\n};
+        }
     }
 
     $context->{blocks} ||= {};
