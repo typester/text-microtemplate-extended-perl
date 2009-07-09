@@ -27,6 +27,10 @@ t/module.t
 t/pod.t
 t/pod_coverage.t
 t/templates/args.mt
+t/templates/array.mt
+t/templates/array_base.mt
+t/templates/array_base2.mt
+t/templates/array_inherit.mt
 t/templates/base.mt
 t/templates/code.mt
 t/templates/content.mt
