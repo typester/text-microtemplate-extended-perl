@@ -11,6 +11,7 @@ my $mt = Text::MicroTemplate::Extended->new(
     template_args => {
         foo  => 'foo!',
         bar  => { bar => 'bar!!!' },
+        array => [ qw/foo bar baz/ ],
         code => sub { 'code out' },
     },
 );
@@ -24,7 +25,7 @@ filters {
 };
 
 run_compare;
-run_compare; # test for cache
+#run_compare; # test for cache
 
 __DATA__
 
@@ -77,3 +78,18 @@ bar!!!
 --- input: code
 --- expected
 code out
+
+=== template with array and shift it in template child block
+--- input: array
+--- expected
+foo
+bar
+baz
+
+=== inherit above
+--- input: array_inherit
+--- expected
+1
+2
+3
+
