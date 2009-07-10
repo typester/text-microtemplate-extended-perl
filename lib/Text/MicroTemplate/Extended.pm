@@ -10,6 +10,7 @@ sub new {
 
     $self->{template_args} ||= {};
     $self->{extension}     ||= '.mt';
+    $self->{macro}         ||= {};
 
     no warnings 'redefine';
 
@@ -47,6 +48,14 @@ sub block {
     }
 }
 ...
+
+    use warnings;
+    for my $name (keys %{ $self->{macro} }) {
+        no strict 'refs';
+        my $code = $self->{macro}{$name};
+        *{ $self->package_name . "::$name" }
+            = ref $code eq 'CODE' ? $code : sub {$code};
+    }
 
     $self;
 }

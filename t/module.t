@@ -14,6 +14,9 @@ my $mt = Text::MicroTemplate::Extended->new(
         array => [ qw/foo bar baz/ ],
         code => sub { 'code out' },
     },
+    macro => {
+        hello => sub { 'hello macro!' },
+    },
 );
 
 sub render {
@@ -93,3 +96,7 @@ baz
 2
 3
 
+=== macro
+--- input: macro
+--- expected
+hello macro!
