@@ -10,47 +10,40 @@ sub new {
 
     $self->{template_args} ||= {};
     $self->{extension}     ||= '.mt';
-    $self->{macro}         ||= {};
+    my $m = $self->{macro} ||= {};
 
-    no warnings 'redefine';
-
-    eval <<"...";
-package $self->{package_name};
-
-sub context {
-    no warnings;
-    \$self->{render_context};
-}
-
-sub extends {
-    my \$template = shift;
-    context->{extends} = \$template;
-}
-
-sub block {
-    my (\$name, \$code) = \@_;
-
-    my \$block = context->{blocks}{\$name} ||= {
-        context_ref => \$$self->{package_name}::_MTREF,
-        code        => \$code,
+    # install default macros to support template inheritance
+    $m->{extends} = sub {
+        $self->render_context->{extends} = $_[0];
     };
 
-    if (!context->{extends}) {
-        my \$current_ref = \$$self->{package_name}::_MTREF;
-        my \$block_ref   = \$block->{context_ref};
-        
-        my \$rendered = \$\$current_ref;
-        \$\$block_ref = '';
-        
-        my \$result = \$block->{code}->() || \$\$block_ref;
-        
-        \$\$current_ref = (\$rendered || '') . (\$result || '');
-    }
-}
-...
+    $m->{block} = sub {
+        my ($name, $code) = @_;
 
-    use warnings;
+        no strict 'refs';
+        my $block = $self->render_context->{blocks}{$name} ||= {
+            context_ref => ${"$self->{package_name}::_MTREF"},
+            code        => $code,
+        };
+
+        if (!$self->render_context->{extends}) {
+            my $current_ref = ${"$self->{package_name}::_MTREF"};
+            my $block_ref   = $block->{context_ref};
+
+            my $rendered = $$current_ref || '';
+            $$block_ref = '';
+
+            my $result = $block->{code}->() || $$block_ref || '';
+
+            $$current_ref = $rendered . $result;
+        }
+    };
+
     for my $name (keys %{ $self->{macro} }) {
+        unless ($name =~ /^[a-zA-Z_][a-zA-Z0-9_]*$/) {
+            die qq{Invalid macro key name: "$name"};
+        }
+
         no strict 'refs';
         my $code = $self->{macro}{$name};
         *{ $self->package_name . "::$name" }
