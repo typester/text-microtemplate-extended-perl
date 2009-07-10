@@ -25,7 +25,7 @@ filters {
 };
 
 run_compare;
-#run_compare; # test for cache
+run_compare; # test for cache
 
 __DATA__
 

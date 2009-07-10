@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.01003 2009-07-10T16:04:53+09:00
+     - fixed missing cache tests from previous version
+
 0.01002 2009-07-09T21:04:18+09:00
      - fixed a bug multi-time execution block code in template inheritence (Taiyoh Tanaka)
      - fixed blocks bug connot use multi ? syntax without newline between these ? line.
