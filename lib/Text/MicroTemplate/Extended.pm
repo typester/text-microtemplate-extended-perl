@@ -151,6 +151,10 @@ sub {
 ...
 }
 
+1;
+
+__END__
+
 =head1 NAME
 
 Text::MicroTemplate::Extended - Extended MicroTemplate
@@ -399,5 +403,3 @@ The full text of the license can be found in the
 LICENSE file included with this module.
 
 =cut
-
-1;
