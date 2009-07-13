@@ -324,6 +324,32 @@ Then in template:
 
 This template display 'bar'.
 
+C<template_args> also supports CodeRef as its value life below:
+
+    my $mf = Text::MicroTemplate::Extended->new(
+        template_args => { foo => sub { $self->get_foo() } },
+        ...
+    );
+
+In template, you can C<<?= $foo ?> to show C<$foo> value. this value is set by calling C<$self->get_foo> in template process time.
+
+This feature is useful to set variable does not exists when template object is created.
+
+=head2 Macro
+
+Similar to named arguments, but this feature install your subroutine to template instead of variables.
+
+    my $mh = Text::MicroTemplate::Extended->new(
+        macro => {
+            hello => sub { return 'Hello World!' },
+        },
+        ...
+    );
+
+And in template:
+
+    <?= hello() ?> # => 'Hello World'
+
 =head2 extension option
 
 There is another new option 'extension'. You can specify template file extension.

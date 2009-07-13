@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-Text::MicroTemplate::Extended.ja - Japanese document
+Text::MicroTemplate::Extended::ja - Japanese document
 
 =head1 SYNOPSIS
 
@@ -17,7 +17,8 @@ Text::MicroTemplate::Extended.ja - Japanese document
 
 =head1 DESCRIPTION
 
-Text::MicroTemplate::Extended は L<Text::MicroTemplate::File> にをベースにいくつかの機能を追加した拡張モジュールです。基本的な機能については L<Text::MicroTemplate::File> のドキュメントを参照ください。
+Text::MicroTemplate::Extended は L<Text::MicroTemplate::File> にをベースにいくつかの機能を追加した拡張モジュールです。
+基本的な機能については L<Text::MicroTemplate::File> のドキュメントを参照ください。
 
 =head1 拡張された機能
 
@@ -167,6 +168,41 @@ Text::MicroTemplate::Extended オブジェクトの初期化時に C<template_ar
     <?= $foo ?>
 
 で C<bar> という出力が得られます。
+
+また、以下のようにコードリファレンスを渡すとテンプレート実行時に実行されたものが引数として展開されます。
+
+    my $mf = Text::MicroTemplate::Extended->new(
+        template_args => { foo => sub { $self->get_foo() } },
+        ...
+    );
+
+上記のように引数を設定すると C<<?= $foo ?> で C<$self->get_foo> の結果を表示することができます。
+この機能はテンプレートオブジェクト初期化時には引数に与えたいものが存在しない場合など、引数をあとから渡す場合に有効です。
+
+=head2 マクロ機能
+
+マクロ機能は名前付き引数に似ていますが、こちらは引数をつくるかわりに関数をテンプレートに渡します。
+
+    my $mh = Text::MicroTemplate::Extended->new(
+        macro => {
+            hello => sub { return 'Hello World!' },
+        },
+        ...
+    );
+
+このコードはテンプレート内で hello と言う関数を使用できるようにします。
+
+    <?= hello() ?>  # => 'Hello World!'
+
+この機能は C<$key => $coderef> のような構造のハッシュリファレンスを渡すことを想定していますが、value部分に通常のコードリファレンス以外の変数を渡すとそれを自動的にコードリファレンスでくくって使用します。
+上記の C<hello> マクロはこのように書き換えても同じ意味になります。
+
+    my $mh = Text::MicroTemplate::Extended->new(
+        macro => {
+            hello => 'Hello World!',
+        },
+        ...
+    );
 
 =head2 拡張子の省略
 
