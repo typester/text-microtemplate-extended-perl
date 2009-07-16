@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base 'Text::MicroTemplate::File';
 
-our $VERSION = '0.02';
+our $VERSION = '0.02001';
 
 sub new {
     my $self = shift->SUPER::new(@_);
