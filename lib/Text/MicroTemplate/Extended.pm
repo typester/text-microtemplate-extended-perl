@@ -45,6 +45,7 @@ sub new {
         }
 
         no strict 'refs';
+        no warnings 'redefine';
         my $code = $self->{macro}{$name};
         *{ $self->package_name . "::$name" }
             = ref $code eq 'CODE' ? $code : sub {$code};
@@ -331,7 +332,7 @@ C<template_args> also supports CodeRef as its value life below:
         ...
     );
 
-In template, you can C<<?= $foo ?> to show C<$foo> value. this value is set by calling C<$self->get_foo> in template process time.
+In template, you can C<<?= $foo ?>> to show C<$foo> value. this value is set by calling C<$self->get_foo> in template process time.
 
 This feature is useful to set variable does not exists when template object is created.
 
