@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.02002 2009-07-18T11:37:23+09:00
+     - several document fixes
+
 0.02001 2009-07-16T18:50:24+09:00
      - hide redefine warnings
      - fixes pod syntaxs
