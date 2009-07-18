@@ -229,7 +229,7 @@ A child template might look like this:
 
 The C<<? extends ?>> tag is the key here. It tells the template engine that this template "extends" another template. When the template system evaluates this template, first it locates the parent -- in this case, "base.mt".
 
-At that point, the template engine will notice the three {% block %} tags in base.mt and replace those blocks with the contents of the child template. Depending on the value of blog_entries, the output might look like:
+At that point, the template engine will notice the three C<<? block ?>> tags in base.mt and replace those blocks with the contents of the child template. Depending on the value of blog_entries, the output might look like:
 
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -392,6 +392,10 @@ Template file extension. (Default: '.mt')
 =item template_args
 
 Hash Reference of template args.
+
+=item macro
+
+Hash Reference of macros
 
 =back
 
