@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.03 2009-07-24T19:05:00+09:00
+     - added multiple block definition support
+
 0.02002 2009-07-18T11:37:23+09:00
      - several document fixes
 

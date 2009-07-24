@@ -35,6 +35,8 @@ t/templates/base.mt
 t/templates/code.mt
 t/templates/content.mt
 t/templates/macro.mt
+t/templates/multiblock.mt
+t/templates/multiblock_base.mt
 t/templates/simple.mt
 t/templates/subbase.mt
 t/templates/subbase2.mt
