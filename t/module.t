@@ -1,6 +1,6 @@
 use Test::Base;
 
-plan 'no_plan';
+plan tests => blocks() * 2;
 
 use FindBin;
 use Text::MicroTemplate::Extended;
@@ -100,3 +100,15 @@ baz
 --- input: macro
 --- expected
 hello macro!
+
+=== multi block base
+--- input: multiblock_base
+--- expected
+title
+title
+
+=== multi block
+--- input: multiblock
+--- expected
+title replaced
+title replaced
