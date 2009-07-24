@@ -22,7 +22,7 @@ sub new {
 
         no strict 'refs';
         my $block;
-        if ($code) {
+        if (defined $code) {
             $block = $self->render_context->{blocks}{$name} ||= {
                 context_ref => ${"$self->{package_name}::_MTREF"},
                 code        => ref($code) eq 'CODE' ? $code : sub { return $code },
