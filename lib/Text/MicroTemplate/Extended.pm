@@ -153,6 +153,7 @@ sub eval_builder {
     eval <<"...";
 package $self->{package_name};
 sub {
+#line 1
     $self->{render_context}{args};
     Text::MicroTemplate::encoded_string(($self->{render_context}{code})->(\@_));
 }
