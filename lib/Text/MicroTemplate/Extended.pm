@@ -86,7 +86,7 @@ sub render_file {
     $self->render_context($context);
 
     my $renderer = $self->build_file( $template . $self->extension );
-    my $result   = $renderer->(@_)->as_string;
+    my $result   = $renderer->(@_);
 
     if (my $parent = delete $context->{extends}) {
         $result = $self->render($parent);
