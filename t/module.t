@@ -112,3 +112,15 @@ title
 --- expected
 title replaced
 title replaced
+
+=== multi inherit
+--- input: multi_inherit
+--- expected
+base!
+child!
+
+=== include in base template
+--- input: include_in_parent
+--- expected
+included!
+child

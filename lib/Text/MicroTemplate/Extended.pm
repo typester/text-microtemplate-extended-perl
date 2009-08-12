@@ -46,6 +46,10 @@ sub new {
         }
     };
 
+    $m->{include} = sub {
+        $self->include_file(@_);
+    };
+
     for my $name (keys %{ $self->{macro} }) {
         unless ($name =~ /^[a-zA-Z_][a-zA-Z0-9_]*$/) {
             die qq{Invalid macro key name: "$name"};
@@ -75,7 +79,8 @@ sub extension {
 
 {
     no warnings 'once';
-    *render = \&render_file;
+    *render  = \&render_file;
+    *include = \&include_file;
 }
 
 sub render_file {
@@ -95,6 +100,14 @@ sub render_file {
     $self->render_context(undef);
 
     $result;
+}
+
+sub include_file {
+    my $self     = shift;
+    my $template = shift;
+
+    my $renderer = $self->build_file( $template . $self->extension );
+    $renderer->(@_);
 }
 
 sub render_context {
@@ -415,6 +428,25 @@ See L<Text::MicroTemplate::File> for more options.
 
 Render $template_name and return result.
 
+=head2 include ($template_name, @args)
+
+=head2 include_file ($template_name, @args)
+
+Render $template_name and return result.
+
+Difference between include and render is that render treats extends and block macros and supports template inheritance but include not.
+But render method does not work in template.
+
+    <?= $self->render('template') ?> # does not work!
+
+Instead of above, use:
+
+    <?= $self->include('template') ?>
+    
+    # or just
+    
+    <?= include('template') ?>
+
 =head1 INTERNAL METHODS
 
 =head2 build
@@ -442,3 +474,5 @@ The full text of the license can be found in the
 LICENSE file included with this module.
 
 =cut
+
+Process flymake-proc finished
