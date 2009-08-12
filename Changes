@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.05 2009-08-13T00:55:23+09:00
+     - added include method and macro.
+
 0.04 2009-08-03T12:29:02+09:00
      - depends Text::MicroTemplate 0.07
        now 'render' method returns Text::MicroTemplate::EncodedString object.

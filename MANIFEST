@@ -34,7 +34,13 @@ t/templates/array_inherit.mt
 t/templates/base.mt
 t/templates/code.mt
 t/templates/content.mt
+t/templates/include.mt
+t/templates/include_in_parent.mt
+t/templates/include_in_parent_base.mt
 t/templates/macro.mt
+t/templates/multi_inherit.mt
+t/templates/multi_inherit_base.mt
+t/templates/multi_inherit_base_base.mt
 t/templates/multiblock.mt
 t/templates/multiblock_base.mt
 t/templates/simple.mt
