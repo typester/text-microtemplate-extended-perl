@@ -9,7 +9,7 @@ sub new {
     my $self = shift->SUPER::new(@_);
 
     $self->{template_args} ||= {};
-    $self->{extension}     ||= '.mt';
+    $self->{extension}     ||= '.mt' unless defined $self->{extension};
     my $m = $self->{macro} ||= {};
 
     # install default macros to support template inheritance

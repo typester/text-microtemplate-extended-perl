@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.06 2009-11-06T11:29:30+09:00
+     - fix a bug that it's impossible to override file extension to ''
+
 0.05 2009-08-13T00:55:23+09:00
      - added include method and macro.
 
