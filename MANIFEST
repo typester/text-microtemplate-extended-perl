@@ -23,6 +23,7 @@ MANIFEST			This list of files
 META.yml
 README
 t/00_compile.t
+t/bug_override_ext.t
 t/module.t
 t/pod.t
 t/pod_coverage.t
