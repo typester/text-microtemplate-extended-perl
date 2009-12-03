@@ -194,7 +194,7 @@ Text::MicroTemplate::Extended オブジェクトの初期化時に C<template_ar
 
     <?= hello() ?>  # => 'Hello World!'
 
-この機能は C<$key => $coderef> のような構造のハッシュリファレンスを渡すことを想定していますが、value部分に通常のコードリファレンス以外の変数を渡すとそれを自動的にコードリファレンスでくくって使用します。
+この機能は C<< $key => $coderef >> のような構造のハッシュリファレンスを渡すことを想定していますが、value部分に通常のコードリファレンス以外の変数を渡すとそれを自動的にコードリファレンスでくくって使用します。
 上記の C<hello> マクロはこのように書き換えても同じ意味になります。
 
     my $mh = Text::MicroTemplate::Extended->new(
@@ -223,7 +223,7 @@ Text::MicroTemplate::Extended オブジェクトの初期化時に C<template_ar
 
     $mf->render_file('template_name');
 
-というコードで C<template_name.mt> を読み込むようにすることができます。また、上記の「テンプレートの継承」でもこのオプションが使用され、C<extension => '.mt'> の場合は C<<? extends 'base' ?>> というコードは C<base.mt> をロードします。
+というコードで C<template_name.mt> を読み込むようにすることができます。また、上記の「テンプレートの継承」でもこのオプションが使用され、C<< extension => '.mt' >> の場合は C<<? extends 'base' ?>> というコードは C<base.mt> をロードします。
 
 このオプションはデフォルトでは C<.mt> に設定されています。
 
