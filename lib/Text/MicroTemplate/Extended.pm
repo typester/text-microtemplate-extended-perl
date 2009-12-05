@@ -36,6 +36,7 @@ sub new {
         if (!$self->render_context->{extends}) {
             my $current_ref = ${"$self->{package_name}::_MTREF"};
             my $block_ref   = $block->{context_ref};
+            local ${"$self->{package_name}::_MTEREF"} = $block_ref;
 
             my $rendered = $$current_ref || '';
             $$block_ref = '';
