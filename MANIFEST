@@ -24,6 +24,7 @@ META.yml
 README
 t/00_compile.t
 t/bug_override_ext.t
+t/filter.t
 t/module.t
 t/pod.t
 t/pod_coverage.t
@@ -35,6 +36,7 @@ t/templates/array_inherit.mt
 t/templates/base.mt
 t/templates/code.mt
 t/templates/content.mt
+t/templates/filter.mt
 t/templates/include.mt
 t/templates/include_in_parent.mt
 t/templates/include_in_parent_base.mt
