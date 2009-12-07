@@ -124,3 +124,17 @@ child!
 --- expected
 included!
 child
+
+=== super
+--- input: super_child
+--- expected
+title base
+title child
+
+=== super 2
+--- input: super_child_child
+--- expected
+title base
+title child
+title child child
+
