@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.09 2009-12-08T11:00:11+09:00
+     - support <?= super() ?> variable for get parent block content
+
 0.08 2009-12-06T12:46:59+09:00
      - provide _MTEREF variable for filter method. (tokuhirom++)
 

@@ -50,3 +50,7 @@ t/templates/simple.mt
 t/templates/subbase.mt
 t/templates/subbase2.mt
 t/templates/subcontent.mt
+t/templates/super_base.mt
+t/templates/super_base.t
+t/templates/super_child.mt
+t/templates/super_child_child.mt
