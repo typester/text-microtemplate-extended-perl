@@ -339,6 +339,10 @@ If you find yourself duplicating content in a number of templates, it probably m
 
 =item *
 
+If you need to get the content of the block from the parent template, the C<< <?= super() ?> >> variable will do the trick. This is useful if you want to add to the contents of a parent block instead of completely overriding it. Data inserted using C<< <?= super() ?> >> will not be automatically escaped, since it was already escaped, if necessary, in the parent template.
+
+=item *
+
 For extra readability, you can optionally give a name to your C<<? } # endblock ?>> tag. For example:
 
     <? block content => sub { ?>
