@@ -47,7 +47,7 @@ sub new {
             my $current_ref = ${"$self->{package_name}::_MTREF"};
             my $rendered = $$current_ref || '';
 
-            $super = $self->_render_block($_)
+            $super = Text::MicroTemplate::encoded_string($self->_render_block($_))
                 for (@{ $self->render_context->{super}{$name} || [] });
 
             $$current_ref = $rendered . $self->_render_block($block);
