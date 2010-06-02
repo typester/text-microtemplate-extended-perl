@@ -264,8 +264,8 @@ A child template might look like this:
     
     ? block content => sub {
     ? for my $entry (@$blog_entries) {
-        <h2><? $entry->title ?></h2>
-        <p><? $entry->body ?></p>
+        <h2><?= $entry->title ?></h2>
+        <p><?= $entry->body ?></p>
     ? } # endfor
     ? } # endblock
 

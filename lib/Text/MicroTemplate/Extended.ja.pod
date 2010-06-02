@@ -67,8 +67,8 @@ Text::MicroTemplate::Extended ではこのテンプレート継承の仕組み�
     
     ? block content => sub {
     ? for my $entry (@$blog_entries) {
-        <h2><? $entry->title ?></h2>
-        <p><? $entry->body ?></p>
+        <h2><?= $entry->title ?></h2>
+        <p><?= $entry->body ?></p>
     ? } # endfor
     ? } # endblock
 
