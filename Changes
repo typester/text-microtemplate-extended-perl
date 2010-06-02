@@ -1,5 +1,10 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.10 2010-06-02T16:17:21+09:00
+     - fix wrong template syntax at examples in docs (gfx++)
+     - added executable example for template inheritance (gfx++)
+     - depends latest Text::MicroTemplate (kazuho++)
+
 0.09 2009-12-08T11:00:11+09:00
      - support <?= super() ?> variable for get parent block content
 
