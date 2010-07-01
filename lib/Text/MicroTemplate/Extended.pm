@@ -100,13 +100,25 @@ sub render_file {
     $self->render_context($context);
 
     my $renderer = $self->build_file( $template . $self->extension );
-    my $result   = $renderer->(@_);
+    my $result;
 
-    if (my $parent = delete $context->{extends}) {
-        $result = $self->render($parent);
+    my $die_msg;
+    {
+        local $@;
+        eval {
+            $result = $renderer->(@_);
+        };
+        $die_msg = $@;
+    }
+    unless ($die_msg) {
+        if (my $parent = delete $context->{extends}) {
+            $result = $self->render($parent);
+        }
     }
 
     $self->render_context(undef);
+
+    die $die_msg if $die_msg;
 
     $result;
 }
