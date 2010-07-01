@@ -1,5 +1,9 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.11 2010-07-01T12:26:35+09:00
+     - fixed a bug render_context doen't clear when template processtime error occured.
+       (Reported by shin1rosei)
+
 0.10 2010-06-02T16:17:21+09:00
      - fix wrong template syntax at examples in docs (gfx++)
      - added executable example for template inheritance (gfx++)

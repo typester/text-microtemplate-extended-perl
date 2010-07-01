@@ -6,8 +6,8 @@ all_from 'lib/Text/MicroTemplate/Extended.pm';
 
 requires 'Text::MicroTemplate' => '0.13';
 
-test_requires 'Test::More';
-use_test_base;
+test_requires 'Test::More' => '0.94';
+test_requires 'Test::Base';
 
 auto_set_repository;
 
