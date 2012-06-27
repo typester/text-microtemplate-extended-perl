@@ -1,5 +1,9 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.13 2012-06-28T01:12:10+09:00
+     - fix line number in error
+     - fix error handling on blocks
+
 0.12 2010-09-27T17:29:24+09:00
      - depends latest Text::MicroTemplate (tokuhirom++)
      - use 'use_test_base' function instead of depending it (tokuhirom++)
