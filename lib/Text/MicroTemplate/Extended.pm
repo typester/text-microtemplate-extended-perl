@@ -163,6 +163,7 @@ sub build {
     }->();
 
     $context->{args} = '';
+    my $offset = 0;
     for my $key (keys %{ $self->template_args || {} }) {
         unless ($key =~ /^[a-zA-Z_][a-zA-Z0-9_]*$/) {
             die qq{Invalid template args key name: "$key"};
@@ -174,6 +175,7 @@ sub build {
         else {
             $context->{args} .= qq{my \$$key = \$self->template_args->{$key};\n};
         }
+        $offset++;
     }
 
     $context->{blocks} ||= {};
@@ -184,24 +186,22 @@ sub build {
         if (my $builder = $self->eval_builder) {
             return $builder;
         }
-        $die_msg = $self->_error($@, 4, $context->{caller});
+        $die_msg = $self->_error($@, 2 + $offset, $context->{caller});
     }
     die $die_msg;
 }
 
 sub eval_builder {
-    my $self = shift;
+    my ($self, $offset) = @_;
 
     local $SIG{__WARN__} = sub {
-        print STDERR $self->_error(shift, 4, $self->render_context->{caller});
+        print STDERR $self->_error(shift, 2 + $offset, $self->render_context->{caller});
     };
 
     eval <<"...";
 package $self->{package_name};
 sub {
-#line 1
-    $self->{render_context}{args};
-    Text::MicroTemplate::encoded_string(($self->{render_context}{code})->(\@_));
+    $self->{render_context}{args}Text::MicroTemplate::encoded_string(($self->{render_context}{code})->(\@_));
 }
 ...
 }
