@@ -107,6 +107,9 @@ sub render_file {
         local $@;
         eval {
             $result = $renderer->(@_);
+
+            my $tmpl = $self->{template};
+            $_->{template_ref} ||= \$tmpl for values %{ $context->{blocks} };
         };
         $die_msg = $@;
     }
@@ -132,7 +135,17 @@ sub _render_block {
     local ${"$self->{package_name}::_MTEREF"} = $block_ref;
 
     $$block_ref = '';
-    my $result = $block->{code}->() || $$block_ref || '';
+    my ($result, $die_msg);
+    eval {
+        $result = $block->{code}->() || $$block_ref || '';
+    };
+    if ($@) {
+        my $context = $self->render_context;
+        local $self->{template} = ${ $block->{template_ref} };
+        die $self->_error($@, 2 + $context->{offset}, $context->{caller});
+    }
+
+    $result;
 }
 
 sub include_file {
@@ -179,6 +192,7 @@ sub build {
     }
 
     $context->{blocks} ||= {};
+    $context->{offset} = $offset;
 
     my $die_msg;
     {
