@@ -197,7 +197,7 @@ sub build {
     my $die_msg;
     {
         local $@;
-        if (my $builder = $self->eval_builder) {
+        if (my $builder = $self->eval_builder($offset)) {
             return $builder;
         }
         $die_msg = $self->_error($@, 2 + $offset, $context->{caller});
