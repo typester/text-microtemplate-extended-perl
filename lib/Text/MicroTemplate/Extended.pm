@@ -121,7 +121,8 @@ sub render_file {
 
     $self->render_context(undef);
 
-    die $die_msg if $die_msg;
+    die $self->_error($die_msg, 2 + $context->{offset}, $context->{caller})
+        if $die_msg;
 
     $result;
 }
