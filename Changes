@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.15 2012-06-29T10:34:16+09:00
+     - fix runtime error handling
+
 0.14 2012-06-28T11:23:17+09:00
      - fix line number in warnings too
 
