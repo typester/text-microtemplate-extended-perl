@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::MicroTemplate::Extended
 
+0.16 2012-06-30T10:37:37+09:00
+     - remove unused module use line from new test case added previous version.
+
 0.15 2012-06-29T10:34:16+09:00
      - fix runtime error handling
 
