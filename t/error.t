@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More;
 use FindBin;
-use IO::Scalar;
 
 use Text::MicroTemplate::Extended;
 
