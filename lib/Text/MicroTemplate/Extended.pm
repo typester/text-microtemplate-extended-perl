@@ -121,7 +121,7 @@ sub render_file {
 
     $self->render_context(undef);
 
-    die $self->_error($die_msg, 2 + $context->{offset}, $context->{caller})
+    die $self->_error($die_msg, 0, $context->{caller})
         if $die_msg;
 
     $result;
@@ -143,7 +143,7 @@ sub _render_block {
     if ($@) {
         my $context = $self->render_context;
         local $self->{template} = ${ $block->{template_ref} };
-        die $self->_error($@, 2 + $context->{offset}, $context->{caller});
+        die $self->_error($@, 0, $context->{caller});
     }
 
     $result;
@@ -177,7 +177,6 @@ sub build {
     }->();
 
     $context->{args} = '';
-    my $offset = 0;
     for my $key (keys %{ $self->template_args || {} }) {
         unless ($key =~ /^[a-zA-Z_][a-zA-Z0-9_]*$/) {
             die qq{Invalid template args key name: "$key"};
@@ -189,34 +188,34 @@ sub build {
         else {
             $context->{args} .= qq{my \$$key = \$self->template_args->{$key};\n};
         }
-        $offset++;
     }
 
     $context->{blocks} ||= {};
-    $context->{offset} = $offset;
 
     my $die_msg;
     {
         local $@;
-        if (my $builder = $self->eval_builder($offset)) {
+        if (my $builder = $self->eval_builder()) {
             return $builder;
         }
-        $die_msg = $self->_error($@, 2 + $offset, $context->{caller});
+        $die_msg = $self->_error($@, 0, $context->{caller});
     }
     die $die_msg;
 }
 
 sub eval_builder {
-    my ($self, $offset) = @_;
+    my ($self) = @_;
 
     local $SIG{__WARN__} = sub {
-        print STDERR $self->_error(shift, 2 + $offset, $self->render_context->{caller});
+        print STDERR $self->_error(shift, 0, $self->render_context->{caller});
     };
 
     eval <<"...";
 package $self->{package_name};
 sub {
-    $self->{render_context}{args}Text::MicroTemplate::encoded_string(($self->{render_context}{code})->(\@_));
+    $self->{render_context}{args}
+# line 1
+    Text::MicroTemplate::encoded_string(($self->{render_context}{code})->(\@_));
 }
 ...
 }

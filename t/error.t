@@ -61,4 +61,39 @@ my $out;
     like $@, qr/5: <\?= undefined_func\(\) \?>/, 'line number ok';
 }
 
+subtest with_cache => sub {
+    # reproduced by tokuhirom
+    my $mt = Text::MicroTemplate::Extended->new(
+        include_path => ["$FindBin::Bin/templates"],
+        use_cache    => 1,
+        open_layer => ':utf8',
+        macro => { },
+        template_args => { },
+    );
+
+    my $app = sub {
+        my $engine = $mt;
+        local $engine->{template_args} = {
+            type => 'ster',
+            typo => 'ster',
+            typo => 'stor',
+            type => 'stor',
+        };
+        eval {
+            $out = $engine->render_file( 'error/base-err-runtime', {} );
+            use Data::Dumper;
+            warn Dumper "$out";
+        };
+        ok $@, 'error ok';
+        ok !$out, 'no output ok';
+
+        like $@, qr/&main::undefined_func called at line 7/, 'error ok';
+        like $@, qr/7: <\?= undefined_func\(\) \?>/, 'line number ok';
+    };
+    for (1..2) {
+        eval { $app->() };
+        print $@ if $@;
+    }
+};
+
 done_testing;
